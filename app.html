@@ -1,31 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Firebase (protección de sesión) -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyATzJRDR7EgnsL6-kOY1Qu_rxnRFuUGpc0",
-    authDomain: "cuentacobroapb.firebaseapp.com",
-    projectId: "cuentacobroapb",
-    storageBucket: "cuentacobroapb.appspot.com",
-    messagingSenderId: "286353921348",
-    appId: "1:286353921348:web:d4e86c917e4c443d96f311"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-
-  // 🔒 Protección: si no hay sesión → volver al login
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      window.location.href = "index.html";
-    }
-  });
-
-  const db = firebase.firestore();
-</script>
 
 <head>
 <meta charset="utf-8">
