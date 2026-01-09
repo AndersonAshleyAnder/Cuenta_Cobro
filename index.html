@@ -74,7 +74,7 @@ function login(){
     .then(() => {
       alert("Login correcto ✅");
       // luego redirigimos a tu app
-      // window.location.href = "app.html";
+      window.location.href = "app.html";
     })
     .catch(err => {
       document.getElementById("error").innerText = err.message;
