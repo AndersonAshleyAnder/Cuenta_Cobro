@@ -122,6 +122,12 @@ h1 {
   // Servicios que usaremos
   const auth = firebase.auth();
   const db = firebase.firestore();
+	function cerrarSesion(){
+  firebase.auth().signOut().then(()=>{
+    window.location.href = "index.html";
+  });
+}
+
 </script>
 <button onclick="cerrarSesion()" style="position:fixed;top:15px;right:15px;z-index:9999;">
   Cerrar sesión
