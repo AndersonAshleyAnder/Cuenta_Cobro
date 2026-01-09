@@ -2,68 +2,82 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cuenta de Cobro - Login</title>
+<title>Login Cuenta de Cobro</title>
 
-<!-- Firebase CDN COMPAT -->
+<!-- Firebase CDN (FORMA CORRECTA) -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyATzJRDR7EgnsL6-kOY1Qu_rxnRFuUGpc0",
+    authDomain: "cuentacobroapb.firebaseapp.com",
+    projectId: "cuentacobroapb",
+    storageBucket: "cuentacobroapb.appspot.com",
+    messagingSenderId: "286353921348",
+    appId: "1:286353921348:web:d4e86c917e4c443d96f311"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 <style>
-body{margin:0;font-family:Arial;background:#f2f2f2}
-#loginBox{max-width:360px;margin:120px auto;background:#fff;padding:30px;border-radius:8px;box-shadow:0 0 10px rgba(0,0,0,.2)}
-input,button{width:100%;padding:10px;margin:8px 0}
-button{background:#000;color:#fff;border:none;cursor:pointer}
-#error{color:red}
-#app{display:none}
+body{
+  font-family: Arial, sans-serif;
+  background:#f2f2f2;
+}
+.login-box{
+  width:320px;
+  margin:120px auto;
+  padding:25px;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+input,button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+}
+button{
+  background:#000;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+#error{
+  color:red;
+  margin-top:10px;
+}
 </style>
 </head>
+
 <body>
 
-<div id="loginBox">
+<div class="login-box">
   <h2>🔐 Iniciar sesión</h2>
+
   <input id="email" type="email" placeholder="Correo">
   <input id="password" type="password" placeholder="Contraseña">
   <button onclick="login()">Ingresar</button>
-  <p id="error"></p>
-</div>
 
-<div id="app">
-  <!-- AQUÍ VA TU APP REAL -->
-  <iframe src="app.html" style="width:100%;height:100vh;border:none"></iframe>
+  <div id="error"></div>
 </div>
 
 <script>
-/* 🔥 CONFIG REAL Y CORRECTO */
-const firebaseConfig = {
-  apiKey: "AIzaSyATzJRDR7EgnsL6-kOY1Qu_rxnRFuUGpc0",
-  authDomain: "cuentacobroapb.firebaseapp.com",
-  projectId: "cuentacobroapb",
-  storageBucket: "cuentacobroapb.appspot.com",
-  messagingSenderId: "286353921348",
-  appId: "1:286353921348:web:d4e86c917e4c443d96f311"
-};
-
-/* ✅ INICIALIZAR UNA SOLA VEZ */
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-/* 🔐 Detectar sesión */
-auth.onAuthStateChanged(user => {
-  if(user){
-    document.getElementById('loginBox').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  }
-});
-
-/* 🔑 Login */
 function login(){
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+  const email = document.getElementById("email").value;
+  const pass  = document.getElementById("password").value;
 
-  auth.signInWithEmailAndPassword(email,password)
+  firebase.auth()
+    .signInWithEmailAndPassword(email, pass)
+    .then(() => {
+      alert("Login correcto ✅");
+      // luego redirigimos a tu app
+      // window.location.href = "app.html";
+    })
     .catch(err => {
-      document.getElementById('error').innerText = err.message;
+      document.getElementById("error").innerText = err.message;
     });
 }
 </script>
