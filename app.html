@@ -523,9 +523,17 @@ function guardarCliente(){
 </script>
 	<script>
 function cerrarSesion() {
-  alert("Función cerrarSesion ejecutada");
+  firebase.auth().signOut()
+    .then(() => {
+      alert("Sesión cerrada");
+      window.location.replace("index.html");
+    })
+    .catch(err => {
+      alert("Error al cerrar sesión: " + err.message);
+    });
 }
 </script>
+
 
 
 </body>
