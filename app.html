@@ -162,7 +162,7 @@ h1 {
   <button onclick="generarPDF()">Generar PDF</button>
   <button onclick="mostrarHistorial()">📄 Ver historial</button>
   <button onclick="cambiarConsecutivo()">✏️ Cambiar consecutivo</button>
-	<button onclick="cerrarSesion()">Cerrar sesión</button>
+  <button onclick="cerrarSesion()">Cerrar sesión</button>
 </div>
 
 <!-- Modal Historial -->
@@ -523,11 +523,10 @@ function guardarCliente(){
 </script>
 	<script>
 function cerrarSesion() {
-  firebase.auth().signOut().then(() => {
-    window.location.replace("index.html");
-  });
+  alert("Función cerrarSesion ejecutada");
 }
 </script>
+
 
 </body>
 </html>
