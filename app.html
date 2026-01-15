@@ -78,6 +78,7 @@ h1 {
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
   const firebaseConfig = {
@@ -90,11 +91,14 @@ h1 {
     firebase.initializeApp(firebaseConfig);
   }
 
-  // 🔒 Protección CORRECTA (sin login infinito)
+  // 🔑 USAR UNA SOLA INSTANCIA
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // 🔒 Protección estable (sin loop)
   document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
-      const user = firebase.auth().currentUser;
-      if (!user) {
+      if (!auth.currentUser) {
         window.location.replace("index.html");
       }
     }, 800);
