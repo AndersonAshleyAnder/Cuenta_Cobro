@@ -90,20 +90,17 @@ h1 {
     firebase.initializeApp(firebaseConfig);
   }
 
-  let authResolved = false;
-
-  firebase.auth().onAuthStateChanged(user => {
-    if (authResolved) return;
-    authResolved = true;
-
-    // Esperar un ciclo completo antes de decidir
+  // 🔒 Protección CORRECTA (sin login infinito)
+  document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
+      const user = firebase.auth().currentUser;
       if (!user) {
         window.location.replace("index.html");
       }
-    }, 200);
+    }, 800);
   });
 </script>
+
 
 <body>
 
