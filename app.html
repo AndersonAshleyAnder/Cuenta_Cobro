@@ -521,6 +521,13 @@ function guardarCliente(){
     }, 200);
   });
 </script>
-	
+	<script>
+function cerrarSesion() {
+  firebase.auth().signOut().then(() => {
+    window.location.replace("index.html");
+  });
+}
+</script>
+
 </body>
 </html>
