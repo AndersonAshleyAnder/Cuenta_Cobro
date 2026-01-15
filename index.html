@@ -65,19 +65,19 @@ button{
 </div>
 
 <script>
-function login(){
+function login() {
   const email = document.getElementById("email").value;
-  const pass  = document.getElementById("password").value;
+  const pass = document.getElementById("password").value;
 
-  firebase.auth()
-    .signInWithEmailAndPassword(email, pass)
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(() => {
-      alert("Login correcto ✅");
-      // luego redirigimos a tu app
+      return firebase.auth().signInWithEmailAndPassword(email, pass);
+    })
+    .then(() => {
       window.location.href = "app.html";
     })
     .catch(err => {
-      document.getElementById("error").innerText = err.message;
+      alert(err.message);
     });
 }
 </script>
