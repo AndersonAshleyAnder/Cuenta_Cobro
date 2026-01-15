@@ -78,35 +78,33 @@ h1 {
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
   const firebaseConfig = {
     apiKey: "AIzaSyATzJRDR7EgnsL6-kOY1Qu_rxnRFuUGpc0",
     authDomain: "cuentacobroapb.firebaseapp.com",
-    projectId: "cuentacobroapb",
-    storageBucket: "cuentacobroapb.appspot.com",
-    messagingSenderId: "286353921348",
-    appId: "1:286353921348:web:d4e86c917e4c443d96f311"
+    projectId: "cuentacobroapb"
   };
 
-  // ✅ Inicializar Firebase SOLO una vez
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
 
-  // 🔒 Protección: si no hay sesión → login
-  firebase.auth().onAuthStateChanged(user => {
-    if (!user) {
-      window.location.href = "index.html";
-    }
-  });
+  let authResolved = false;
 
-  // Firestore disponible para tu app
-  const db = firebase.firestore();
+  firebase.auth().onAuthStateChanged(user => {
+    if (authResolved) return;
+    authResolved = true;
+
+    // Esperar un ciclo completo antes de decidir
+    setTimeout(() => {
+      if (!user) {
+        window.location.replace("index.html");
+      }
+    }, 200);
+  });
 </script>
 
-	
 <body>
 
 <div class="sheet" id="captureArea">
@@ -498,5 +496,33 @@ function guardarCliente(){
   saveClientRecord(name, nit, tel, dir);
 }
 </script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyATzJRDR7EgnsL6-kOY1Qu_rxnRFuUGpc0",
+    authDomain: "cuentacobroapb.firebaseapp.com",
+    projectId: "cuentacobroapb"
+  };
+
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  let authResolved = false;
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (authResolved) return;
+    authResolved = true;
+
+    setTimeout(() => {
+      if (!user) {
+        window.location.replace("index.html");
+      }
+    }, 200);
+  });
+</script>
+	
 </body>
 </html>
